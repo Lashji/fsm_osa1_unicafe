@@ -1,4 +1,4 @@
-// Version 1.5
+// Version 1.7
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -107,7 +107,7 @@ class App extends React.Component {
             <div>
             <h1>anna palautetta</h1>
             <Buttons handler={this.arvio} />
-            <Statistiikka state={this.state} />
+            <Statistics state={this.state} />
             </div>
         )
         
@@ -134,20 +134,38 @@ const Buttons = ({handler}) => {
     )
 }
 
-const Statistiikka = ({state}) => {
+const Statistics = ({state}) => {
     const {hyva, neutraali, huono, keskiarvo, positiivisia} = state
     
-    return <div>
+    return ( <div>
         <h1>Statistiikka</h1>
-        <p>hyvä {hyva}</p>
-        <p>neutraali {neutraali}</p>
-        <p>huono {huono}</p>
-        <p>keskiarvo {keskiarvo}</p>
-        <p>positiivisia {positiivisia} %</p>
+
+        <Statistic text={"hyva"} val={hyva} />
+        <Statistic text={"neutraali"} val={neutraali} />
+        <Statistic text={"huono"} val={huono} />
+        <Statistic text={"keskiarvo"} val={keskiarvo} />
+        <Statistic text={"positiivisia"} val={positiivisia} />
+        
       </div>
+    )
+
+}
+
+const Statistic = ({text, val}) => {
+
+    return (
+        <div>
+            
+            <p>{text} : {val}</p>
+
+        </div>
+    )
+
 
 
 }
+
+
 
 const Button = ({handler, text}) => {
     return (
