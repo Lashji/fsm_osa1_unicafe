@@ -137,6 +137,16 @@ const Buttons = ({handler}) => {
 const Statistics = ({state}) => {
     const {hyva, neutraali, huono, keskiarvo, positiivisia} = state
     
+    
+    if (hyva === 0 && neutraali === 0 && huono === 0){
+        return (
+            <div>
+                <p>Yhtään palautetta ei ole annettu</p>
+            </div>
+        )
+    } 
+
+    
     return ( <div>
         <h1>Statistiikka</h1>
 
