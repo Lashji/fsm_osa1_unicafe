@@ -149,13 +149,13 @@ const Statistics = ({state}) => {
     
     return ( <div>
         <h1>Statistiikka</h1>
-
-        <Statistic text={"hyva"} val={hyva} />
-        <Statistic text={"neutraali"} val={neutraali} />
-        <Statistic text={"huono"} val={huono} />
-        <Statistic text={"keskiarvo"} val={keskiarvo} />
-        <Statistic text={"positiivisia"} val={positiivisia} />
-        
+        <table>
+                <Statistic text={"hyva"} val={hyva} />
+                <Statistic text={"neutraali"} val={neutraali} />
+                <Statistic text={"huono"} val={huono} />
+                <Statistic text={"keskiarvo"} val={keskiarvo} />
+                <Statistic text={"positiivisia"} val={positiivisia} />
+        </table>
       </div>
     )
 
@@ -163,12 +163,21 @@ const Statistics = ({state}) => {
 
 const Statistic = ({text, val}) => {
 
-    return (
-        <div>
-            
-            <p>{text} : {val}</p>
+    if (text === "positiivisia") {
+        val = val + " %"
+    }
 
-        </div>
+    return (
+            <tbody>
+                <tr>
+                    <td>
+                        {text} 
+                    </td>
+                    <td>
+                        {val} 
+                    </td>
+                </tr>
+            </tbody>
     )
 
 
