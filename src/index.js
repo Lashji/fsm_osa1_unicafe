@@ -1,3 +1,4 @@
+// Version 1.5
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -16,12 +17,15 @@ class App extends React.Component {
 
 
     arvio = (arvio) => {
+        const {keskiarvo, positiivisia} = this.laskeStatistiikat(arvio)
 
-        const {keskiarvo, positiivisia} = this.laskeStatistiikat()
-        console.log(keskiarvo, positiivisia)
         switch(arvio){
             case 'hyvä': 
+            
                 return () => {
+
+
+
                     this.setState({
                         hyva: this.state.hyva + 1,
                         keskiarvo: keskiarvo,
@@ -31,6 +35,7 @@ class App extends React.Component {
             }
 
             case 'neutraali':
+
                 return () => {
 
                     this.setState({
@@ -41,6 +46,7 @@ class App extends React.Component {
                 
             }
             case 'huono':
+
                 return () => {
 
                     this.setState({
@@ -56,17 +62,33 @@ class App extends React.Component {
 
     }
 
-    laskeStatistiikat = () => {
+    laskeStatistiikat = (arvio) => {
 
         const stats = { 
             keskiarvo: 0,
             positiivisia: 0
         }
+
         let {hyva, neutraali, huono} = this.state
 
         if (hyva === 0 && neutraali === 0 && huono === 0){
             return stats
         }
+
+        switch(arvio) {
+            case "hyvä": 
+                hyva += 1;
+                break
+            case "neutraali":
+                neutraali += 1;
+                break
+            case "huono":
+                huono += 1;
+                break
+            default: 
+                break
+        }
+
 
         let summa = hyva + neutraali + huono
         stats.keskiarvo = (hyva - huono) / summa
@@ -129,9 +151,9 @@ const Statistiikka = ({state}) => {
 
 const Button = ({handler, text}) => {
     return (
-        <div>
+        
             <button onClick={handler} >{text}</button>
-        </div>
+        
     )
 
 }
